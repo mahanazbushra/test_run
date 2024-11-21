@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "963927760561",
+    "project_id": "setup-firebase-5048a",
+    "storage_bucket": "setup-firebase-5048a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963927760561:android:2b724c78ee50bbb5f4cc90",
+        "android_client_info": {
+          "package_name": "com.example.test_run"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Vj1Rn6sRf8PqlCJ8nKfOyaEgQ7o01Bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
