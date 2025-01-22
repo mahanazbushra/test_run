@@ -6,6 +6,8 @@ import 'package:test_run/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:test_run/user/firebase_auth_implementation/firebase_auth_services.dart';
 
+import 'forgot_password.dart';
+
 
 class Mylogin extends StatefulWidget {
   const Mylogin({super.key});
@@ -16,6 +18,8 @@ class Mylogin extends StatefulWidget {
 
 class _MyloginState extends State<Mylogin> {
 
+  static const String _adminEmail = 'maha.nazz.bushra333@gmail.com';
+  static const String _adminPassword = 'adminpassword';
 
 bool _isSigning = false;
 final FirebaseAuthService _auth = FirebaseAuthService();
@@ -34,6 +38,7 @@ TextEditingController _passwordController = TextEditingController();
   Widget build(BuildContext context) {
 
     return Scaffold(
+
       backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
       appBar: AppBar(
 
@@ -41,211 +46,215 @@ TextEditingController _passwordController = TextEditingController();
         automaticallyImplyLeading: false,
         elevation: 0,
       ),
-        body: Stack(
-          children: [
-            // ... your existing container ...
-            Container(
-              padding: EdgeInsets.only(left: 40, top: 90), // Adjust padding as needed
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Welcome Back!",style:GoogleFonts.playfairDisplay(
+       body: LayoutBuilder(
+           builder: (BuildContext context, BoxConstraints constraints)
+       // body: Stack(
+       //body: Center(
+      //child :SingleChildScrollView(
+       //reverse: true,
+{
+     //children: [
+  return Center(
+    child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Column(
 
-                    color: Color.fromRGBO(96, 81, 81, 1.0),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30, // Adjust font size as needed
-                  ),
-                  ),
-                  SizedBox(height: 8), // Add spacing between heading and text
-                  Text(
-                    "Login to your account.", // Your additional text
-                    style: GoogleFonts.sourceSerif4(
-                      color: Color.fromRGBO(96, 81, 81, 1.0),
-                      fontSize: 16, // Adjust font size as needed
-                    ),
-                  ),
-                ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            Text(
+
+              "Welcome Back!",style:GoogleFonts.playfairDisplay(
+
+              color: Color.fromRGBO(96, 81, 81, 1.0),
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Login to your account.",
+              style: GoogleFonts.sourceSerif4(
+                color: Color.fromRGBO(96, 81, 81, 1.0),
+                fontSize: 16,
               ),
             ),
+            SizedBox(height: 36),
+            TextField(
+              controller: _emailController,
 
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.25,
-                  right: 35,
-                  left: 35),
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                labelText: 'Email',
+                hintText: 'Enter your Email',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                ),
 
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _emailController,
-
-                      decoration: InputDecoration(
-                          fillColor: Colors.white,
-                          filled: true,
-                          labelText: 'Email',
-                          hintText: 'Enter Phone Number or Email',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-
-                      ) ,
-                      keyboardType: TextInputType.emailAddress,
+              ) ,
+              keyboardType: TextInputType.emailAddress,
 
 
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
 
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText ? Icons.visibility_off: Icons.visibility,
-                            color: Colors.grey,
-                            size: 24,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                      keyboardType: TextInputType.visiblePassword,
-                    ),
-                SizedBox(
-                    height: 20,
-                    ),
-                    Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                labelText: 'Password',
+                hintText: 'Enter your password',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off: Icons.visibility,
+                    color: Colors.grey,
+                    size: 24,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+              ),
+              keyboardType: TextInputType.visiblePassword,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
 
-                    GestureDetector(
-                    onTap: () {
-                      // Navigate to sign-in screen
+                GestureDetector(
+                  onTap: () {
+
                     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Mylogin()),
+                      context,
+                      MaterialPageRoute(builder: (context) => ForgotPassword()),
                     );
-                    },
-                    child: Text(
+                  },
+                  child: Text(
                     'Forgot Password?',
                     style: TextStyle(
-                    color: Colors.blue,
+                      color: Colors.blue,
 
                     ),
-                    ),
-                    ),
-                  ],
-                    ),
+                  ),
+                ),
+              ],
+            ),
 
-                    SizedBox(
-                      height: 40,
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 1,
+              width: 400,
+            ),
+            GestureDetector(
+              onTap: () {
+                _signIn();
+              },
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(96,81,81, 1.0),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: _isSigning ? CircularProgressIndicator(
+                    color: Colors.white,) : Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                      height: 50,
-                      width: 400,
-    ),
-                      GestureDetector(
-                        onTap: () {
-                          _signIn();
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(96,81,81, 1.0),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: _isSigning ? CircularProgressIndicator(
-                              color: Colors.white,) : Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    SizedBox(height: 10,),
-                    GestureDetector(
-                      onTap: () {
-                        _signInWithGoogle();
-
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-
-                              SizedBox(width: 5,),
-                              Text(
-                                "Sign in with Google",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('New User?'),
-                        SizedBox(width: 8), // Add some spacing
-                        GestureDetector(
-                          onTap: () {
-                            // Navigate to sign-in screen
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignUp()),
-
-                            );
-                          },
-                          child: Text(
-                            'Create Account',
-                            style: TextStyle(
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
+            SizedBox(
+              height: 10,),
+            GestureDetector(
+              onTap: () {
+                _signInWithGoogle();
 
-        ],
+              },
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(96,81,81, 1.0),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      SizedBox(width: 5,),
+                      Text(
+                        "Sign in with Google",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('New User?'),
+                SizedBox(width: 8), // Add some spacing
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to sign-in screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUp()),
+
+                    );
+                  },
+                  child: Text(
+                    'Create Account',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+    ),
+  );
+
+
+},
+        ), //1
     );
+
+
   }
   void _signIn() async {
     setState(() {
@@ -254,6 +263,16 @@ TextEditingController _passwordController = TextEditingController();
 
     String email = _emailController.text;
     String password = _passwordController.text;
+
+    if (email == _adminEmail && password == _adminPassword) {
+      setState(() {
+        _isSigning = false;
+      });
+      showToast("Admin Logged in successfully");
+      Navigator.pushNamed(context, "Admin Dashboard"); // Navigate to admin page
+      return;
+    }
+
     User? user = await _auth.signInWithEmailAndPassword(
         email,
         password // First positional argument (email)_passwordController.text, // Second positional argument (password)
@@ -266,7 +285,7 @@ TextEditingController _passwordController = TextEditingController();
       Navigator.pushNamed(context, "home");
     }
     else {
-      showToast("Some error occured");
+      showToast("Email or Password is incorrect");
     }
   }
 
@@ -289,7 +308,7 @@ _signInWithGoogle()async{
       );
 
       await _firebaseAuth.signInWithCredential(credential);
-      Navigator.pushNamed(context, "/home");
+      Navigator.pushNamed(context, "home");
     }
 
   }catch(e) {

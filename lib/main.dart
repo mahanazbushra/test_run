@@ -27,9 +27,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:test_run/home.dart';
+import 'package:test_run/admin/admin.dart';
+import 'package:test_run/Customer/home.dart';
 import 'package:test_run/signup.dart';
+import 'package:test_run/splashscreen.dart';
+import 'package:test_run/verify_email_page.dart';
 
+
+import 'admin/product/ui/screens/add_new_product_screens.dart';
+import 'admin/product/ui/screens/update_product_screens.dart';
 import 'login.dart';
 
 void main() async {
@@ -57,12 +63,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
+      initialRoute: 'splash screen',
 
       routes: {
+        'splash screen': (context) => SplashScreen(),
         'login': (context) => Mylogin(),
         'signUp': (context) => SignUp(),
         'home': (context) => HomeActivity(),
+        'Verify Email' :(context) => VerifyEmailPage(),
+       'Admin Dashboard' : (context) => Admin(),
+        //'add-new-product':(context) => const AddNewProductScreen(),
+        //'update-product':(context) => const UpdateProductScreen()
+
       },
     );
   }

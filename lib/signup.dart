@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:test_run/login.dart';
-
+import 'verify_email_page.dart';
 import 'package:test_run/user/firebase_auth_implementation/firebase_auth_services.dart';
 
-import 'home.dart';
+import 'Customer/home.dart';
 
 
 
@@ -106,10 +107,10 @@ class _SignUpState extends State<SignUp>
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.only(left:75,top:10),
+            padding: EdgeInsets.only(left:95,top:10),
             child:
 
-            Text("Register Now! ", textAlign: TextAlign.center, style: TextStyle(
+            Text("Register Now! ", textAlign: TextAlign.center, style: GoogleFonts.playfairDisplay(
               color: Color.fromRGBO(96,81,81, 1.0),fontWeight : FontWeight.bold,fontSize: 33
             ),),
 
@@ -329,7 +330,7 @@ class _SignUpState extends State<SignUp>
       )
     ),
     ),
-  ]
+ ]
       ),
     );
 
@@ -372,11 +373,11 @@ class _SignUpState extends State<SignUp>
     );
     if (user != null)
       {
-        showToast("User is successfully created");
-        Navigator.pushNamed(context, "home");
+        showToast("Verify your email");
+        Navigator.pushNamed(context, "Verify Email");
       }
     else{
-      showToast("Some error occured");
+      showToast("Already Registered");
     }
 
   }
