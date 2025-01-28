@@ -104,45 +104,50 @@ class _SignUpState extends State<SignUp>
 
 
   ),
-      body: Stack(
-        children: [
-          Container(
-            padding: EdgeInsets.only(left:95,top:10),
-            child:
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints)
+{
+          //children: [
+         return Center(
+           
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Text("Register Now! ", textAlign: TextAlign.center, style: GoogleFonts.playfairDisplay(
+                  color: Color.fromRGBO(96,81,81, 1.0),fontWeight : FontWeight.bold,fontSize: 33
+                ),),
 
-            Text("Register Now! ", textAlign: TextAlign.center, style: GoogleFonts.playfairDisplay(
-              color: Color.fromRGBO(96,81,81, 1.0),fontWeight : FontWeight.bold,fontSize: 33
-            ),),
-
-
-            ),
-
-    SingleChildScrollView(
-    child: Container(
-    padding: EdgeInsets.only(top:MediaQuery. of(context).size.height*0.1,right: 35,left:35),
-      child:Form(
-        child: Column(
-          key: _formKey,
-          children: [
-            TextFormField(
+                  SizedBox(height: 30),
+              
+              
+              
+                  Form(
+                    child: Column(
+                      key: _formKey,
+                      children: [
+                        TextFormField(
               controller: _usernameController,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
                   labelText: ' Name',
                 hintText: ' Enter your Name',
-
+              
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)
                 )
               ) ,
               validator: (name) => name!.length<3?'Name should be at least 3 characters':null,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-            SizedBox(
+                        ),
+                        SizedBox(
               height: 30,
-            ),
-            TextFormField(
+                        ),
+                        TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -155,13 +160,13 @@ class _SignUpState extends State<SignUp>
               ) ,
               keyboardType: TextInputType.emailAddress,
               validator: validateEmail,
-
+              
               autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-            SizedBox(
+                        ),
+                        SizedBox(
               height: 30,
-            ),
-            TextFormField(
+                        ),
+                        TextFormField(
               controller: _mobileNumberController,
               decoration: InputDecoration(
                   fillColor: Colors.white,
@@ -173,23 +178,23 @@ class _SignUpState extends State<SignUp>
                   )
               ) ,
               keyboardType: TextInputType.phone,
-
+              
                   // ... other properties ...
                   validator: validateBangladeshMobile,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-
-            ),
-            SizedBox(
+              
+                        ),
+                        SizedBox(
               height: 30,
-            ),
-            TextFormField(
-
+                        ),
+                        TextFormField(
+              
               controller: _passwordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-
+              
                 labelText: ' New Password',
                 hintText: 'Create new password',
                 border: OutlineInputBorder(
@@ -208,21 +213,21 @@ class _SignUpState extends State<SignUp>
                   },
                 ),
               ),
-
+              
               validator: validatePassword,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-
-            ),
-            SizedBox(
+              
+                        ),
+                        SizedBox(
               height: 30,
-            ),
-            TextFormField(
+                        ),
+                        TextFormField(
               controller: _confirmPasswordController,
               obscureText: _obscureText,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-
+              
                 labelText: ' Confirm Password',
                 hintText: 'Confirm your password',
                 border: OutlineInputBorder(
@@ -240,69 +245,69 @@ class _SignUpState extends State<SignUp>
                     });
                   },
                 ),
-
+              
               ),
               validator: validateConfirmPassword,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-    ),
-            SizedBox(
-            height: 40,),
-
-    GestureDetector(
-    onTap:  (){
-    _signUp();
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Mylogin()),
-    );
-
-
-    },
-    child: Container(
-    width: double.infinity,
-    height: 45,
-    decoration: BoxDecoration(
-      color: Color.fromRGBO(96,81,81, 1.0),
-    borderRadius: BorderRadius.circular(10),
-    ),
-    child: Center(
-    child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
-    "Sign Up",
-    style: TextStyle(
-    color: Colors.white, fontWeight: FontWeight.bold),
-    )),
-    ),
-
-
-
-            //   child: ElevatedButton(
-            //     onPressed: _signUp,
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: Color.fromRGBO(96,81,81, 1.0),
-            //       foregroundColor: Colors.white,
-            //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            //       textStyle: TextStyle(fontSize: 18),
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(10),
-            //       ),
-            //     ),
-            //     child: Row(
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //
-            //
-            //         Text('Sign Up'),
-            //
-            //       ],
-            //     ),
-            //  ),
-            // ),
-    ),
-
-            SizedBox(
+                      ),
+                        SizedBox(
+                        height: 40,),
+              
+                      GestureDetector(
+                      onTap:  (){
+                      _signUp();
+                      Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Mylogin()),
+                      );
+              
+              
+                      },
+                      child: Container(
+                      width: double.infinity,
+                      height: 45,
+                      decoration: BoxDecoration(
+                  color: Color.fromRGBO(96,81,81, 1.0),
+                      borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                      child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
+                      "Sign Up",
+                      style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
+                      ),
+              
+              
+              
+                        //   child: ElevatedButton(
+                        //     onPressed: _signUp,
+                        //     style: ElevatedButton.styleFrom(
+                        //       backgroundColor: Color.fromRGBO(96,81,81, 1.0),
+                        //       foregroundColor: Colors.white,
+                        //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        //       textStyle: TextStyle(fontSize: 18),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //       ),
+                        //     ),
+                        //     child: Row(
+                        //       mainAxisSize: MainAxisSize.min,
+                        //       children: [
+                        //
+                        //
+                        //         Text('Sign Up'),
+                        //
+                        //       ],
+                        //     ),
+                        //  ),
+                        // ),
+                      ),
+              
+                        SizedBox(
               height: 20,
-            ),
-            Row(
+                        ),
+                        Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Already have an account?'),
@@ -318,19 +323,23 @@ class _SignUpState extends State<SignUp>
                     'Sign in',
                     style: TextStyle(
                       color: Colors.blue,
-
+              
                     ),
                   ),
                 ),
               ],
-            )
-          ],
+                        )
+                      ],
+              
+                    ),
+                  ),
+               ]
+                       ),
+                ),
+            ),
+         );
 
-        ),
-      )
-    ),
-    ),
- ]
+},
       ),
     );
 

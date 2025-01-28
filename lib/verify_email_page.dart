@@ -16,7 +16,7 @@ class Utils {
 
 class VerifyEmailPage extends StatefulWidget {
   @override
-  _VerifyEmailPageState createState() => _VerifyEmailPageState(); // Corrected class name
+  _VerifyEmailPageState createState() => _VerifyEmailPageState();
 }
 
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
@@ -59,7 +59,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
 
-      // Call setState to rebuild the widget
+
       setState(() => canResendEmail = false);
       await Future.delayed(Duration(seconds: 30));
       setState(() => canResendEmail = true);
@@ -77,7 +77,10 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     return isEmailVerified
         ? HomeActivity()
         : Scaffold(
+        backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text('Verify Email'),
       ),
       body: Padding(

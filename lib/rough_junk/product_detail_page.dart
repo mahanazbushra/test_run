@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'product.dart';
+// import 'products_list.dart';
 // import 'product_form.dart';
 //
 // class ProductDetailPage extends StatelessWidget {

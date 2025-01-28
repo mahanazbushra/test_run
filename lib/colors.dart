@@ -10,4 +10,5 @@ class AppColors{
   static const pink6= Color(0xFF605151);
 
 
+
 }

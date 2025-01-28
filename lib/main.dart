@@ -1,3 +1,89 @@
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:get/get.dart';
+import 'package:test_run/admin/admin.dart';
+import 'package:test_run/Customer/home.dart';
+import 'package:test_run/signup.dart';
+import 'package:test_run/splashscreen.dart';
+import 'package:test_run/verify_email_page.dart';
+// 
+import 'admin/contoller/product_controller.dart';
+import 'login.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures Flutter bindings are initialized
+
+  // Initialize Firebase
+  try {
+    if (kIsWeb) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyCAI78Q59ZQCSyoCthgDIE1wvkS-n5Q3NQ",
+            authDomain: "ecommerce-efdf9.firebaseapp.com",
+            projectId: "ecommerce-efdf9",
+            storageBucket: "ecommerce-efdf9.firebasestorage.app",
+            messagingSenderId: "557469507425",
+            appId: "1:557469507425:web:f1d28a7d5d90ad95cf6f20",
+            measurementId: "G-KFJ5GBMTET"
+          // apiKey: "AIzaSyCAI78Q59ZQCSyoCthgDIE1wvkS-n5Q3NQ",
+          // authDomain: "ecommerce-efdf9.firebaseapp.com",
+          // projectId: "ecommerce-efdf9",
+          // storageBucket: "ecommerce-efdf9.firebasestorage.app",
+          // messagingSenderId: "557469507425",
+          // appId: "1:557469507425:web:fe31954f24f4717fcf6f20",
+          // measurementId: "G-FME5V4DJ3F",
+        ),
+      );
+    } else {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyCG8BryJhYBnB8LFRUtoXJcKrHEXVKlLJY",
+          authDomain: "ecommerce-efdf9.firebaseapp.com",
+          projectId: "ecommerce-efdf9",
+          storageBucket: "ecommerce-efdf9.firebasestorage.app",
+          messagingSenderId: "557469507425",
+          appId: "1:557469507425:android:540aba67b7807614cf6f20",
+        ),
+      );
+    }
+
+    Get.put(ProductController());
+
+    runApp(const MyApp()); // Launch the application
+  } catch (e) {
+    print("Firebase initialization error: $e");
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+
+      debugShowCheckedModeBanner: false,
+      initialRoute: 'splash screen',
+
+      routes: {
+        'splash screen': (context) => SplashScreen(),
+        'login': (context) => Mylogin(),
+        'signUp': (context) => SignUp(),
+        'home': (context) => HomeActivity(),
+        'Verify Email' :(context) => VerifyEmailPage(),
+       'Admin Dashboard' : (context) => Admin(),
+        //'add-new-product':(context) => const AddNewProductScreen(),
+        //'update-product':(context) => const UpdateProductScreen()
+
+      },
+    );
+  }
+}
+
 // import 'package:firebase_core/firebase_core.dart';
 //
 // import 'package:flutter/cupertino.dart';
@@ -22,60 +108,3 @@
 //
 //
 // }
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:test_run/admin/admin.dart';
-import 'package:test_run/Customer/home.dart';
-import 'package:test_run/signup.dart';
-import 'package:test_run/splashscreen.dart';
-import 'package:test_run/verify_email_page.dart';
-
-
-import 'admin/product/ui/screens/add_new_product_screens.dart';
-import 'admin/product/ui/screens/update_product_screens.dart';
-import 'login.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb){
-    Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyB_Vj1Rn6sRf8PqlCJ8nKfOyaEgQ7o01Bw",
-        authDomain: "setup-firebase-5048a.firebaseapp.com",
-          projectId: "setup-firebase-5048a",
-        storageBucket: "setup-firebase-5048a.firebasestorage.app",
-          messagingSenderId: "963927760561",
-          appId: "1:963927760561:android:2b724c78ee50bbb5f4cc90",
-          measurementId: "G-W7G7NGWT8G",
-      ),);
-  }else{
-    Firebase.initializeApp();
-  }
-
-  runApp(const MyApp());//application create
-}
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: 'splash screen',
-
-      routes: {
-        'splash screen': (context) => SplashScreen(),
-        'login': (context) => Mylogin(),
-        'signUp': (context) => SignUp(),
-        'home': (context) => HomeActivity(),
-        'Verify Email' :(context) => VerifyEmailPage(),
-       'Admin Dashboard' : (context) => Admin(),
-        //'add-new-product':(context) => const AddNewProductScreen(),
-        //'update-product':(context) => const UpdateProductScreen()
-
-      },
-    );
-  }
-}

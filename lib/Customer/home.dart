@@ -1,6 +1,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:test_run/Customer/productinfo.dart';
 
 
 class HomeActivity extends StatefulWidget {
@@ -34,6 +35,7 @@ class _HomeActivityState extends State<HomeActivity> {
     //return Builder(
       //builder: (BuildContext context) {
         return Scaffold(
+
 
           key: _scaffoldKey,
           appBar: AppBar(
@@ -176,7 +178,7 @@ class _HomeActivityState extends State<HomeActivity> {
   Widget _buildSearchBar(BuildContext context) {
     final TextEditingController _searchController =
     TextEditingController();
-    return Padding(
+    return SingleChildScrollView(
         padding: const EdgeInsets.all(15.0),
         child: SearchBar(
           controller: _searchController,
@@ -226,7 +228,8 @@ void showSnackBar(String s, BuildContext context) {
         'asset/kittyspider.jpg',
         'asset/flower_clips.jpg',
 
-      ].map((imagePath) {
+      ].map((imagePath){
+
         return Builder(
           builder: (BuildContext context) {
             return Container(
@@ -262,12 +265,23 @@ Widget _buildOnSaleBanner(BuildContext context,
     crossAxisAlignment:
     CrossAxisAlignment.start,
     children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'On Sale',
-          style: TextStyle(fontSize: 20,
-              fontWeight: FontWeight.bold),
+      GestureDetector(
+        onTap: () {
+          // Navigate toa new page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProductInfo(), // Replace with your desired page
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'All Products',
+            style: TextStyle(fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
       SingleChildScrollView(
