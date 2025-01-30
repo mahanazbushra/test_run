@@ -1,7 +1,9 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:test_run/Customer/productinfo.dart';
+import 'package:test_run/Customer/drawers/delivery.dart';
+import 'package:test_run/Customer/drawers/returnpolicy.dart';
+import 'package:test_run/Customer/ProductCustomer/productinfo.dart';
 
 
 class HomeActivity extends StatefulWidget {
@@ -140,9 +142,33 @@ class _HomeActivityState extends State<HomeActivity> {
                     title: Text("Vouchers and Offers")),
                 ListTile(leading: Icon(Icons.event_available),
                     title: Text("Yarn Stock")),
-                ListTile(leading: Icon(Icons.delivery_dining_outlined),
-                    title: Text("Delivery Policy")),
-                ListTile(title: Text("Return and Refund Policy")),
+                ListTile(
+                  leading: Icon(Icons.delivery_dining_outlined),
+                    title: Text("Delivery Policy"),
+                  onTap: () {
+                    Navigator.pop(context); // Close the drawer
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Delivery(), // Navigate to DeliveryPolicy page
+                      ),
+                    );
+                  },
+                ),
+
+
+
+                ListTile(title: Text("Return and Refund Policy"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ReturnRefundPolicyScreen(),
+                      ),
+                    );
+                  },
+                ),
                 ListTile(title: Text("Terms and Conditions")),
                 ListTile(title: Text("Privacy and Policy")),
                 ListTile(title: Text("Logout")),
@@ -271,7 +297,7 @@ Widget _buildOnSaleBanner(BuildContext context,
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ProductInfo(), // Replace with your desired page
+              builder: (context) => const ProductInfo(),
             ),
           );
         },

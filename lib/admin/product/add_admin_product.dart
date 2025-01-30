@@ -58,15 +58,43 @@ class ProductAdd extends StatelessWidget {
                   maxLines: 5,
                 ),
                 SizedBox(height: 20),
-                TextField(
-                  controller: ctrl.productImgCtrl,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-
-                      ),
-                      label: Text('Product Image'),
-                      hintText: 'Enter Product Image URL'
+                // TextField(
+                //   controller: ctrl.productImgCtrl,
+                //   decoration: InputDecoration(
+                //       border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(10)
+                //
+                //       ),
+                //       label: Text('Product Image'),
+                //       hintText: 'Enter Product Image URL'
+                //   ),
+                // ),
+                // GestureDetector(
+                //   onTap: () => ctrl.pickImage(),
+                //   child: Container(
+                //     width: double.infinity,
+                //     padding: EdgeInsets.all(20),
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: Colors.grey),
+                //       borderRadius: BorderRadius.circular(10),
+                //     ),
+                //     child: ctrl.imageUrl == null
+                //         ? Text('Tap to upload an image')
+                //         : Image.network(ctrl.imageUrl!),
+                //   ),
+                // ),
+                GestureDetector(
+                  onTap: () => ctrl.pickImage(),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ctrl.imageUrl == null
+                        ? Text('Tap to upload an image')
+                        : Image.network(ctrl.imageUrl!),
                   ),
                 ),
                 SizedBox(height: 20),

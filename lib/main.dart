@@ -6,19 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:test_run/admin/admin.dart';
 import 'package:test_run/Customer/home.dart';
 import 'package:test_run/signup.dart';
 import 'package:test_run/splashscreen.dart';
 import 'package:test_run/verify_email_page.dart';
-// 
+
+import 'Customer/controller_customer/product_cus_controller.dart';
 import 'admin/contoller/product_controller.dart';
 import 'login.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensures Flutter bindings are initialized
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
+
   try {
     if (kIsWeb) {
       await Firebase.initializeApp(
@@ -52,7 +54,14 @@ void main() async {
       );
     }
 
+      await Supabase.initialize(
+        url:'https://qfgzrzyqipfymbnatstk.supabase.co',
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmZ3pyenlxaXBmeW1ibmF0c3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgyMzQwNTUsImV4cCI6MjA1MzgxMDA1NX0.Y3GnS2PbbMuhYTZPePuQu4I3AJcJwiUdz-ZE1cSjlq4',
+
+      );
+
     Get.put(ProductController());
+    Get.put(ProductCustomerController());
 
     runApp(const MyApp()); // Launch the application
   } catch (e) {
@@ -76,6 +85,7 @@ class MyApp extends StatelessWidget {
         'home': (context) => HomeActivity(),
         'Verify Email' :(context) => VerifyEmailPage(),
        'Admin Dashboard' : (context) => Admin(),
+
         //'add-new-product':(context) => const AddNewProductScreen(),
         //'update-product':(context) => const UpdateProductScreen()
 

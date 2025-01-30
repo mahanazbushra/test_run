@@ -48,6 +48,11 @@ dependencies:
   cached_network_image: ^3.4.1
   get: ^4.6.6
   dropdown_button2: ^2.3.9
+  supabase_flutter: ^2.8.3
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
+
+
 
 
   google_sign_in: ^6.2.2
@@ -59,6 +64,7 @@ dev_dependencies:
   change_app_package_name: ^1.0.0
   json_serializable: ^6.9.3
   build_runner: ^2.4.14
+
 
   flutter_test:
     sdk: flutter
