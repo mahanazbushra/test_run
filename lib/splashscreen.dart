@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import google_fonts package
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:test_run/login.dart';
 
@@ -30,11 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Replace with your icon path
+
               SizedBox(height: 20),
               Text(
                 "Crochet O' clock",
-                style: GoogleFonts.dancingScript( // Using Dancing Script font
+                style: GoogleFonts.dancingScript(
                   fontSize: 34,
                   fontWeight: FontWeight.w700,
                   color: Color.fromRGBO(96, 81, 81, 1.0),

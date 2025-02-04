@@ -15,6 +15,7 @@ const ProductCard({super.key, required this.name, required this.imageUrl, requir
        onTap();
       },
       child: Card(
+        color: Colors.white,
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -23,7 +24,7 @@ const ProductCard({super.key, required this.name, required this.imageUrl, requir
             children: [
               Image.network(
                 imageUrl,
-                //'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmWnQyrBdSF74Ntt5fWyTCiT_Do-p6qZ6Mog&s',
+
                 fit:BoxFit.cover,
                 width: double.maxFinite,
                 height:120,
@@ -32,7 +33,7 @@ const ProductCard({super.key, required this.name, required this.imageUrl, requir
               Text(name,style: TextStyle(fontSize:16),
                 overflow: TextOverflow.ellipsis,),
               SizedBox(height: 9),
-              Text("BDT : $price",style: TextStyle(fontSize:16),
+              Text("৳ : $price",style: TextStyle(fontSize:16),
                 overflow: TextOverflow.ellipsis,),
             ],
           ),

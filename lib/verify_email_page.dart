@@ -1,5 +1,5 @@
 
-import 'dart:async'; // Import for Timer
+import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +7,10 @@ import 'package:test_run/Customer/home.dart';
 
 
 
-//Define Utils class (or import it if it exists elsewhere)
+
 class Utils {
   static void showSnackBar(String message) {
-    // Implement your snackbar logic here
+
   }
 }
 

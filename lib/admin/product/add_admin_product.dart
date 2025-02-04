@@ -16,7 +16,9 @@ class ProductAdd extends StatelessWidget {
         backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
         appBar: AppBar(title: Text('Add Product'),
           backgroundColor: Colors.transparent,
-          elevation: 0,),
+          elevation: 0,
+        scrolledUnderElevation: 0,
+        ),
         body: SingleChildScrollView(
           child: Container(
             margin: EdgeInsets.all(20),
@@ -124,7 +126,7 @@ class ProductAdd extends StatelessWidget {
                           //state management kora hoise
                           selectedItemText: ctrl.category,
                           onSelected: (selectedValue) {
-                          ctrl.category = selectedValue ?? 'Not Specified';
+                          ctrl.category = selectedValue ?? 'Category';
                           ctrl.update();
                           },)),
                     Flexible(
@@ -138,7 +140,7 @@ class ProductAdd extends StatelessWidget {
                           ],
                           selectedItemText: ctrl.yarn_type,
                           onSelected: (selectedValue) {
-                            ctrl.yarn_type = selectedValue ?? 'Not Selected';
+                            ctrl.yarn_type = selectedValue ?? 'Yarn_Type';
                             ctrl.update();
                           },)),
                   ],

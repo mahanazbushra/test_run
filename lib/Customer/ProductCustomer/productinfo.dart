@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:test_run/Customer/controller_customer/product_cus_controller.dart';
 import 'package:test_run/Customer/ProductCustomer/productdes.dart';
@@ -8,7 +10,7 @@ import 'package:test_run/Customer/widget/productcard.dart';
 import '../../admin/product/widgets/drop_down_btn.dart';
 
 class ProductInfo extends StatelessWidget {
-  const ProductInfo({super.key}); // Use const constructor
+  const ProductInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +18,15 @@ class ProductInfo extends StatelessWidget {
       return RefreshIndicator(
         onRefresh: () async { ctrl.fetchProducts(); },
         child: Scaffold(
+          backgroundColor: Color.fromRGBO(253, 227, 227,1.0),
           appBar: AppBar(
+            backgroundColor: const Color.fromRGBO(96, 81, 81, 1.0),
+            foregroundColor: Colors.white,
             title: const Text(
               'All Products', style: TextStyle(fontWeight: FontWeight.bold),),
+elevation: 0,
 
+            scrolledUnderElevation: 0,
           ),
           body: Column(
             children: [
@@ -46,14 +53,23 @@ class ProductInfo extends StatelessWidget {
                     child: DropDownBtn(
                       items: ['Price: Low to High', 'Price: High to Low'],
                       selectedItemText: 'Sort',
-                      onSelected: (selected) {},
+                      onSelected: (selected) {
+
+                        ctrl.sortByPrice(ascending: selected == 'Price: Low to High'? true:false);
+                      },
                     ),
                   ),
-                  Flexible(child: MultiSelectDdb(items: [ 'Flowers',
-                    'Home Decors',
-                    'Accecories',
-                    'Clothing',
-                    'Plushies'], onSelectionChanged: (SelectedItems) {},)),
+                  Flexible(child: MultiSelectDdb(items: [
+                    'Fleece Yarn',
+                    'Milk Cotton',
+                    'Acrylic',
+                    'Butter Yarn',
+                    'Plush yarn'
+                  ], onSelectionChanged: (SelectedItems) {
+
+                    ctrl.filterByYarnType(selectedItems);
+
+                  },)),
                 ],
               ),
               Expanded(
@@ -71,13 +87,13 @@ class ProductInfo extends StatelessWidget {
                         imageUrl: ctrl.productShowInUi[index].image ?? 'url',
                         price: ctrl.productShowInUi[index].price ?? 00,
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => const ProductDescription()),);
-                        },
+                          Get.to(ProductDescription(),arguments: {'data':ctrl.productShowInUi[index]});
+                        //   Navigator.push(context, MaterialPageRoute(
+                        //       builder: (context) => const ProductDescription()),);
+                         },
                       );
                     }),
               )
-
 
             ],
           ),

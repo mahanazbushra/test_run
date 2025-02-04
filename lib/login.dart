@@ -45,6 +45,7 @@ TextEditingController _passwordController = TextEditingController();
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         elevation: 0,
+        scrolledUnderElevation: 0,
       ),
        body: LayoutBuilder(
            builder: (BuildContext context, BoxConstraints constraints)
@@ -224,10 +225,10 @@ TextEditingController _passwordController = TextEditingController();
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('New User?'),
-                SizedBox(width: 8), // Add some spacing
+                SizedBox(width: 8),
                 GestureDetector(
                   onTap: () {
-                    // Navigate to sign-in screen
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SignUp()),
@@ -275,7 +276,7 @@ TextEditingController _passwordController = TextEditingController();
 
     User? user = await _auth.signInWithEmailAndPassword(
         email,
-        password // First positional argument (email)_passwordController.text, // Second positional argument (password)
+        password
     );
     setState(() {
       _isSigning = false;

@@ -7,12 +7,14 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:test_run/Customer/controller_customer/purchase_controller.dart';
 import 'package:test_run/admin/admin.dart';
 import 'package:test_run/Customer/home.dart';
 import 'package:test_run/signup.dart';
 import 'package:test_run/splashscreen.dart';
 import 'package:test_run/verify_email_page.dart';
 
+import 'Customer/cart.dart';
 import 'Customer/controller_customer/product_cus_controller.dart';
 import 'admin/contoller/product_controller.dart';
 import 'login.dart';
@@ -59,9 +61,14 @@ void main() async {
         anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmZ3pyenlxaXBmeW1ibmF0c3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgyMzQwNTUsImV4cCI6MjA1MzgxMDA1NX0.Y3GnS2PbbMuhYTZPePuQu4I3AJcJwiUdz-ZE1cSjlq4',
 
       );
+    // final supabase = Supabase.instance.client;
+    // final response = await supabase.from('ECommerce').select().limit(1);
+    //print(response);
 
     Get.put(ProductController());
     Get.put(ProductCustomerController());
+    //Get.put(PurchaseController());
+    Get.put(CartController());
 
     runApp(const MyApp()); // Launch the application
   } catch (e) {

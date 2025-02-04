@@ -14,6 +14,7 @@ final Function(List<String>) onSelectionChanged;
   @override
   Widget build(BuildContext context) {
     return Card(
+      color:  Color.fromRGBO(96, 81, 81, 1.0),
       child: Center(
         child: DropdownButtonHideUnderline(
           child: DropdownButton2<String>(
@@ -22,9 +23,7 @@ final Function(List<String>) onSelectionChanged;
               'Select Items',
               style: TextStyle(
                 fontSize: 14,
-                color: Theme
-                    .of(context)
-                    .hintColor,
+                color: Color.fromRGBO(253, 227, 227, 1.0),
               ),
             ),
             items: items.map((item) {

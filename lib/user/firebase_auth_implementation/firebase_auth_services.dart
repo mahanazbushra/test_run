@@ -5,7 +5,7 @@ class FirebaseAuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Sign up with email and password
+
   Future<User?> signUpWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
@@ -16,7 +16,7 @@ class FirebaseAuthService{
       print("Some error occurred during sign up");
       return null;
     }
-  }// Sign in with email and password
+  }
   Future<User?> signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
@@ -28,7 +28,7 @@ class FirebaseAuthService{
     }
   }
 
-  // Set user role
+
   Future<void> setUserRole(String uid, String role) async {
     try {
       await _firestore.collection('users').doc(uid).set({'role': role});

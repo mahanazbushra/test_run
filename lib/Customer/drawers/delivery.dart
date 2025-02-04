@@ -5,7 +5,7 @@ class Delivery extends StatelessWidget {const Delivery({Key? key}) : super(key: 
 
 @override
 Widget build(BuildContext context) {
-  return Scaffold( // Changed from MaterialApp to Scaffold
+  return Scaffold(
     body: const DeliveryPolicyScreen(),
   );
 }
@@ -28,7 +28,7 @@ Widget build(BuildContext context) {
         foregroundColor: Colors.white,
 
         elevation: 0,centerTitle: true,
-        automaticallyImplyLeading: true, // This is already true by default
+        automaticallyImplyLeading: true,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,

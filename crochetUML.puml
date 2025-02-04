@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+
+actor Customer
+actor Admin
+
+rectangle CrochetO'clock {
+  Customer -- (Register)
+  Customer -- (Login)
+  Customer-- (Forgot Password)
+  Customer -- (Verify Email)
+
+  Customer -- (Browse Products)
+  Customer -- (Notifications)
+  Customer -- (View Product Details)
+  Customer -- (Search Products)
+  Customer -- (Add to Cart)
+  Customer -- (Place Order)
+  Customer -- (View Ordered Items)
+  Customer -- (Write Reviews)
+  Customer -- (View Vouchers and offers)
+  Customer -- (View Yarn Stocks)
+  Customer -- (View  Delivery Policy)
+  Customer -- (View  Return and Refund Policy)
+  Customer -- (View  Privacy Policy)
+  Customer -- (View  Logout)
+
+
+  Admin -- (Login)
+  Admin --  (Dashboard)
+  Admin -- (Manage Products)
+  Admin -- (View Sales)
+  Admin -- (View Reviews)
+  Admin -- (Manage Users)
+  Admin -- (Generate Reports)
+  Admin -- (View Orders)
+  Admin -- (Logout)
+
+  (Browse Products) <.. (Categorize Products) : includes
+  (Manage Products) <.. (Add Product) : extends
+  (Manage Products) <.. (Update Product) : extends
+  (Manage Products) <.. (Delete Product) : extends
+
+}
+@enduml

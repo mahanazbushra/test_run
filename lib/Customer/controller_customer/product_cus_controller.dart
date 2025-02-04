@@ -61,5 +61,37 @@ class ProductCustomerController extends GetxController{
 
   }
 
+  // filterByYarnType(List<String>yarns)
+  // {
+  //   if(yarns.isEmpty){
+  //     productShowInUi = products;
+  //   }
+  //   else{
+  //     List<String> lowerCaseYarns = yarns.map((yarn) => yarn_type.toLowerCase()).toList();
+  //     productShowInUi = products.where((product)=> lowerCaseYarns.contains(product.yarn_type?.toLowerCase));
+  //   }
+  //   update();
+  // }
+  void filterByYarnType(List<String> yarns) {
+    if (yarns.isEmpty) {
+      productShowInUi = products;
+    } else {
+      List<String> lowerCaseYarns = yarns.map((yarn) => yarn.toLowerCase()).toList();
+      productShowInUi = products.where((product) =>
+      product.yarn_type != null && lowerCaseYarns.contains(product.yarn_type!.toLowerCase())
+      ).toList();
+    }
+    update();
+  }
+  sortByPrice({required bool ascending})
+  {
+    List<Product> sortedProducts=List<Product>.from(productShowInUi);
+    sortedProducts.sort((a,b)=> ascending? a.price!.compareTo(b.price!): b.price!.compareTo(a.price!));
+    productShowInUi =sortedProducts;
+    update();
+  }
+
+
+
   void showToast(String s, {required bool isSuccess}) {}
 }

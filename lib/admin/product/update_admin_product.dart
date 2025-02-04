@@ -75,14 +75,14 @@ class ProductUpdate extends StatelessWidget {
 
               ),
               onPressed: () {
-                // Update product in the controller
+
                 ctrl.updateProduct(
                   product.id ?? '',
                   nameController.text,
                   double.tryParse(priceController.text) ?? 0,
                 );
 
-                // Go back to the previous screen
+
                 Get.back();
               },
               child: const Text('Update'),

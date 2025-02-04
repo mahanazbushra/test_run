@@ -1,6 +1,7 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 
 import 'package:test_run/admin/product/product_admin.dart';
 
@@ -9,7 +10,9 @@ import 'package:test_run/admin/reports/reports.dart';
 import 'package:test_run/admin/users_admin/users.dart';
 
 import '../colors.dart';
-import 'contoller/product_controller.dart';
+
+
+import 'logout_admin.dart';
 import 'orders/orders.dart';
 
 
@@ -61,6 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +73,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
         foregroundColor: Color.fromRGBO(96, 81, 81, 1.0),
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          IconButton(onPressed: () {
+
+            Navigator.push(context,
+            MaterialPageRoute(
+              builder: (context) => LogoutPageAdmin(),
+            ),
+            );
+          },
+              icon: const Icon(Icons.logout, color: Color.fromRGBO(96, 81, 81, 1.0),)),
+
+
+        ],
       ),
       body: Row(
         children: <Widget>[
@@ -97,8 +114,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 icon: Icon(Icons.reviews, color: AppColors.pink6),
                 selectedIcon: Icon(Icons.reviews, color: AppColors.pink3),
                 label: Text('Reviews', style: TextStyle(color: AppColors.pink2)),
-              ),],
+              ),
+
+            ],
+
           ),
+
           const VerticalDivider(thickness: 1, width: 1),
           Expanded(
             child: Container(
@@ -119,12 +140,12 @@ class DashboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.pink4,
-      padding: const EdgeInsets.all(8.0), // Reduced padding
+      padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 250, // Reduced maxCrossAxisExtent
-          mainAxisSpacing: 12, // Reduced spacing
-          crossAxisSpacing: 8, // Reduced spacing
+          maxCrossAxisExtent: 250,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 8,
         ),
         itemCount: 4,
         itemBuilder: (context, index) {
@@ -144,34 +165,105 @@ class DashboardContent extends StatelessWidget {
               },
             );
           } else if (index == 1) {
-            return DashboardCard(
-              title: 'Products',
-              icon: Icons.shopping_cart,
-              count: 230,
-              backgroundColor: AppColors.pink4,
-              textColor: AppColors.pink3,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProductAdmin ()),
+            return StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('products').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return DashboardCard(
+                    title: 'Products',
+                    icon: Icons.shopping_cart,
+                    count: 0,
+                    backgroundColor: AppColors.pink4,
+                    textColor: AppColors.pink3,
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return DashboardCard(
+                    title: 'Products',
+                    icon: Icons.shopping_cart,
+                    count: 0,
+                    backgroundColor: AppColors.pink4,
+                    textColor: AppColors.pink3,
+                  );
+                }
+
+                int productCount = snapshot.data?.docs.length ?? 0;
+
+                return DashboardCard(
+                  title: 'Products',
+                  icon: Icons.shopping_cart,
+                  count: productCount,
+                  backgroundColor: AppColors.pink4,
+                  textColor: AppColors.pink3,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductAdmin()),
+                    );
+                  },
                 );
               },
             );
-          } else if (index == 2) {
-            return DashboardCard(
-              title: 'Orders',
-              icon: Icons.monetization_on,
-              count: 120,
-              backgroundColor: AppColors.pink4,
-              textColor: AppColors.pink3,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Orders ()),
+          }
+          // else if (index == 2) {
+          //   return DashboardCard(
+          //     title: 'Orders',
+          //     icon: Icons.monetization_on,
+          //     count: 120,
+          //     backgroundColor: AppColors.pink4,
+          //     textColor: AppColors.pink3,
+          //     onTap: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(builder: (context) => const AdminOrderList ()),
+          //       );
+          //     },
+          //   );
+          // }
+          else if (index == 2) {
+            return StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance.collection('orders').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return DashboardCard(
+                    title: 'Orders',
+                    icon: Icons.error,
+                    count: 0,
+                    backgroundColor: AppColors.pink4,
+                    textColor: AppColors.pink3,
+                  );
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return DashboardCard(
+                    title: 'Orders',
+                    icon: Icons.monetization_on,
+                    count: 0,
+                    backgroundColor: AppColors.pink4,
+                    textColor: AppColors.pink3,
+                  );
+                }
+
+                final orderCount = snapshot.data?.docs.length ?? 0;
+
+                return DashboardCard(
+                  title: 'Orders',
+                  icon: Icons.monetization_on,
+                  count: orderCount,
+                  backgroundColor: AppColors.pink4,
+                  textColor: AppColors.pink3,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const AdminOrderList()),
+                    );
+                  },
                 );
               },
             );
-          } else {
+          }
+          else {
             return DashboardCard(
               title: 'Reports',
               icon: Icons.bar_chart,
@@ -221,21 +313,21 @@ class DashboardCard extends StatelessWidget {
         //   );
         // },
         child: Padding(
-          padding: const EdgeInsets.all(8.0), // Reduced padding
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 32, color: textColor ?? Theme.of(context).primaryColor,), // Reduced icon size
-              const SizedBox(height: 4), // Reduced spacing
+              Icon(icon, size: 32, color: textColor ?? Theme.of(context).primaryColor,),
+              const SizedBox(height: 4),
               Text(
                 title,
-                style: const TextStyle(fontSize: 14), // Reduced font size
+                style: const TextStyle(fontSize: 14),
                 overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 2), // Reduced spacing
+              const SizedBox(height: 2),
               Text(
                 '$count',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Reduced font size
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

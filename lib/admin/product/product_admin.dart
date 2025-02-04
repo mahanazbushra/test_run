@@ -15,6 +15,7 @@ class ProductAdmin extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Products'),
           backgroundColor: Colors.transparent,
+          scrolledUnderElevation: 0,
           elevation: 0,
         ),
         body: ListView.builder(
