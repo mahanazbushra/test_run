@@ -61,17 +61,7 @@ class ProductCustomerController extends GetxController{
 
   }
 
-  // filterByYarnType(List<String>yarns)
-  // {
-  //   if(yarns.isEmpty){
-  //     productShowInUi = products;
-  //   }
-  //   else{
-  //     List<String> lowerCaseYarns = yarns.map((yarn) => yarn_type.toLowerCase()).toList();
-  //     productShowInUi = products.where((product)=> lowerCaseYarns.contains(product.yarn_type?.toLowerCase));
-  //   }
-  //   update();
-  // }
+
   void filterByYarnType(List<String> yarns) {
     if (yarns.isEmpty) {
       productShowInUi = products;

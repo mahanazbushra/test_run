@@ -12,11 +12,15 @@ class AdminOrderList extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(253, 227, 227, 1.0),
       appBar: AppBar(
-        title: const Text('Orders',style: TextStyle(fontWeight: FontWeight.bold,
-          color: Color.fromRGBO(96, 81, 81, 1.0),),),
+        title: const Text(
+          'Orders',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color.fromRGBO(96, 81, 81, 1.0),
+          ),
+        ),
         backgroundColor: Colors.transparent,
         centerTitle: true,
-
         scrolledUnderElevation: 0,
         elevation: 0,
       ),
@@ -52,11 +56,13 @@ class AdminOrderList extends StatelessWidget {
                   DateFormat('MMM dd, yyyy - hh:mm a').format(date);
 
               return Card(
-
                 color: const Color(0xB6E8BECC),
                 margin: const EdgeInsets.only(bottom: 16),
                 child: ExpansionTile(
-                  leading: const Icon(Icons.receipt_long,color: AppColors.pink3,),
+                  leading: const Icon(
+                    Icons.receipt_long,
+                    color: AppColors.pink3,
+                  ),
                   title: Text(
                     'Order #${order.id.substring(0, 8)}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
@@ -106,10 +112,12 @@ class AdminOrderList extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Color.fromRGBO(96, 81, 81, 1.0),
-                                  foregroundColor: Color.fromRGBO(253, 227, 227, 1.0),
+                                  foregroundColor:
+                                      Color.fromRGBO(253, 227, 227, 1.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                  ),),
+                                  ),
+                                ),
                                 onPressed: () => _confirmUpdateStatus(
                                     context, orderId, 'approved'),
                               ),
@@ -122,8 +130,7 @@ class AdminOrderList extends StatelessWidget {
                                 label: const Text(
                                   'Decline',
                                   style: TextStyle(
-                                      color: Color.fromRGBO(96, 81, 81, 1.0)
-                                  ),
+                                      color: Color.fromRGBO(96, 81, 81, 1.0)),
                                 ),
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(
@@ -134,21 +141,27 @@ class AdminOrderList extends StatelessWidget {
                                       const Color.fromRGBO(96, 81, 81, 1.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                  ), ),
+                                  ),
+                                ),
                                 onPressed: () => _confirmUpdateStatus(
                                     context, orderId, 'declined'),
                               ),
                               ElevatedButton.icon(
-                                icon: const Icon(Icons.delete,
-                                    size: 18, color:  Color.fromRGBO(253, 227, 227, 1.0),),
+                                icon: const Icon(
+                                  Icons.delete,
+                                  size: 18,
+                                  color: Color.fromRGBO(253, 227, 227, 1.0),
+                                ),
                                 label: const Text('Delete'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       const Color.fromRGBO(96, 81, 81, 1.0),
-                                  foregroundColor: Color.fromRGBO(253, 227, 227, 1.0),
+                                  foregroundColor:
+                                      Color.fromRGBO(253, 227, 227, 1.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                  ),),
+                                  ),
+                                ),
                                 onPressed: () =>
                                     _confirmDeleteOrder(context, orderId),
                               ),
@@ -199,12 +212,14 @@ class AdminOrderList extends StatelessWidget {
     bool confirm = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: const Color.fromRGBO(253, 227, 227, 1.0),
+        surfaceTintColor: Colors.transparent,
         title: const Text('Confirm Delete'),
         content: const Text('Are you sure you want to delete this order?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: const Text('Cancel',style: TextStyle(color: Colors.brown)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
@@ -239,12 +254,14 @@ class AdminOrderList extends StatelessWidget {
     bool confirm = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: const Color.fromRGBO(253, 227, 227, 1.0),
+        surfaceTintColor: Colors.transparent,
         title: Text('Confirm $action'),
         content: Text('Are you sure you want to $action this order?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: const Text('Cancel',style: TextStyle(color: Colors.brown)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),

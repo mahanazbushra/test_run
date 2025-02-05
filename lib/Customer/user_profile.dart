@@ -14,7 +14,6 @@ class _UserProfileState extends State<UserProfile> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
   Future<void> editField(String field) async {
     String newValue = "";
     await showDialog(
@@ -23,7 +22,9 @@ class _UserProfileState extends State<UserProfile> {
         backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
         title: Text(
           "Edit $field",
-          style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0),),
+          style: TextStyle(
+            color: Color.fromRGBO(96, 81, 81, 1.0),
+          ),
         ),
         content: TextField(
           autofocus: true,
@@ -37,32 +38,31 @@ class _UserProfileState extends State<UserProfile> {
           },
         ),
         actions: [
-
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
               'Cancel',
-              style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0),),
+              style: TextStyle(
+                color: Color.fromRGBO(96, 81, 81, 1.0),
+              ),
             ),
           ),
-
-
           TextButton(
             onPressed: () => Navigator.of(context).pop(newValue),
             child: Text(
               'Save',
-              style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0),),
+              style: TextStyle(
+                color: Color.fromRGBO(96, 81, 81, 1.0),
+              ),
             ),
           ),
         ],
       ),
     ).then((value) async {
       if (value != null && value.isNotEmpty) {
-
         await _firestore.collection("users").doc(currentUser.email).update({
           field: value,
         });
-
 
         setState(() {});
       }
@@ -81,18 +81,14 @@ class _UserProfileState extends State<UserProfile> {
         centerTitle: true,
       ),
       body: StreamBuilder<DocumentSnapshot>(
-        stream: _firestore
-            .collection("users")
-            .doc(currentUser.email)
-            .snapshots(),
+        stream:
+            _firestore.collection("users").doc(currentUser.email).snapshots(),
         builder: (context, snapshot) {
-          // Loading State
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
-
 
           if (snapshot.hasError) {
             return Center(
@@ -100,9 +96,7 @@ class _UserProfileState extends State<UserProfile> {
             );
           }
 
-
           if (!snapshot.hasData || !snapshot.data!.exists) {
-            // Handle case where the document doesn't exist
             return Center(
               child: Text(
                 "No user data found.",
@@ -138,15 +132,11 @@ class _UserProfileState extends State<UserProfile> {
                   ),
                 ),
               ),
-
-
               MyTextBox(
                 text: userData['name'] ?? 'No name',
                 sectionName: 'Name',
                 onPressed: () => editField('name'),
               ),
-
-
               MyTextBox(
                 text: userData['address'] ?? 'No address',
                 sectionName: 'Address',
@@ -164,81 +154,3 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 }
-
-
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core_web/firebase_core_web_interop.dart';
-// import 'package:flutter/material.dart';
-// import 'package:test_run/Customer/widget/text_box.dart';
-//
-// class UserProfile extends StatefulWidget {
-//   const UserProfile({super.key});
-//
-//   @override
-//   State<UserProfile> createState() => _UserProfileState();
-// }
-//
-// class _UserProfileState extends State<UserProfile> {
-//   final currentUser = FirebaseAuth.instance.currentUser!;
-//   Future<void> editField(String field) async
-//   {
-//
-//   }  @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("User Profile"),
-//         backgroundColor: const Color.fromRGBO(96, 81, 81, 1.0),
-//         foregroundColor: Colors.white,
-//         elevation: 0,
-//         centerTitle: true,
-//       ),
-//       body: ListView(
-//         children: [
-//           const SizedBox(
-//             height: 50),
-//
-//           Icon(
-//             Icons.person,
-//             size: 72,
-//
-//           ),
-//           const SizedBox(
-//               height: 50),
-//
-//           Text(currentUser.email!,
-//           textAlign: TextAlign.center,
-//           style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0),
-//           ),
-//           ),
-//             const SizedBox(
-//                 height: 50),
-//
-//           Padding(padding: const EdgeInsets.only(left: 25.0),
-//             child: Text(
-//               'About the User',
-//               style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0),
-//               ),
-//             ),
-//
-//
-//
-//           ),
-//
-//       MyTextBox(text: 'Vernon',
-//         sectionName: 'Name',
-//         onPressed: () => editField('name') ,),
-//
-//
-//
-//           MyTextBox(text: 'house',
-//             sectionName: 'Address',
-//             onPressed: () => editField('address') ,),
-//
-//
-//
-//         ],
-//       ),
-//     );
-//   }
-// }

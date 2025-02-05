@@ -1,20 +1,19 @@
-
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
 List<String> selectedItems = [];
 
 class MultiSelectDdb extends StatelessWidget {
+  final List<String> items;
+  final Function(List<String>) onSelectionChanged;
 
-final List<String> items;
-final Function(List<String>) onSelectionChanged;
-  const MultiSelectDdb({super.key, required this.items, required this.onSelectionChanged});
+  const MultiSelectDdb(
+      {super.key, required this.items, required this.onSelectionChanged});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color:  Color.fromRGBO(96, 81, 81, 1.0),
+      color: Color.fromRGBO(96, 81, 81, 1.0),
       child: Center(
         child: DropdownButtonHideUnderline(
           child: DropdownButton2<String>(
@@ -29,16 +28,17 @@ final Function(List<String>) onSelectionChanged;
             items: items.map((item) {
               return DropdownMenuItem(
                 value: item,
-                 enabled: false,
+                enabled: false,
                 child: StatefulBuilder(
                   builder: (context, menuSetState) {
                     final isSelected = selectedItems.contains(item);
                     return InkWell(
                       onTap: () {
-                        isSelected ? selectedItems.remove(item) : selectedItems
-                            .add(item);
+                        isSelected
+                            ? selectedItems.remove(item)
+                            : selectedItems.add(item);
                         onSelectionChanged(selectedItems);
-                          menuSetState(() {});
+                        menuSetState(() {});
                       },
                       child: Container(
                         height: double.infinity,
@@ -66,11 +66,11 @@ final Function(List<String>) onSelectionChanged;
                 ),
               );
             }).toList(),
-             value: selectedItems.isEmpty ? null : selectedItems.last,
+            value: selectedItems.isEmpty ? null : selectedItems.last,
             onChanged: (value) {},
             selectedItemBuilder: (context) {
               return items.map(
-                    (item) {
+                (item) {
                   return Container(
                     alignment: AlignmentDirectional.center,
                     child: Text(

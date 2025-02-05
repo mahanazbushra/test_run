@@ -49,12 +49,9 @@ TextEditingController _passwordController = TextEditingController();
       ),
        body: LayoutBuilder(
            builder: (BuildContext context, BoxConstraints constraints)
-       // body: Stack(
-       //body: CenterL
-      //child :SingleChildScrollView(
-       //reverse: true,
+
 {
-     //children: [
+
   return Center(
     child: SingleChildScrollView(
       child: Padding(

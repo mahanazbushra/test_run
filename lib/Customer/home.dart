@@ -71,14 +71,6 @@ class _HomeActivityState extends State<HomeActivity> {
           child: ListView(
             children: [
               DrawerHeader(child: Text("Crochet O' clock")),
-
-              // ListTile(leading: Icon(Icons.menu),
-              //title: Text('Menu'),
-              // onTap: (){
-              // Navigator.pop(context);
-              // },
-              //),
-
               ListTile(
                 leading: const Icon(Icons.shopping_bag_outlined),
                 title: const Text("My Orders"),
@@ -86,7 +78,8 @@ class _HomeActivityState extends State<HomeActivity> {
                   final user = FirebaseAuth.instance.currentUser;
                   if (user == null || user.email == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please login to view orders')),
+                      const SnackBar(
+                          content: Text('Please login to view orders')),
                     );
                     return;
                   }
@@ -95,40 +88,28 @@ class _HomeActivityState extends State<HomeActivity> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => OrderListPage(userEmail: user.email!),
+                      builder: (context) =>
+                          OrderListPage(userEmail: user.email!),
                     ),
                   );
                 },
               ),
-
-              //   onTap: () {
-              //     Navigator.pop(context);
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const OrderListPage(
-              //           userId: 'currentUserId',
-              //         ),
-              //       ),
-              //     );
-              //   },
-              // ),
-
               ListTile(
-                  leading: Icon(Icons.rate_review_outlined),
-                  title: Text("Review"),
-                  onTap: () {
-      Navigator.pop(context);
-      Navigator.push(
-      context,
-      MaterialPageRoute(
-      builder: (context) => const Review(),
-      ),
-      );
-      },),
+                leading: Icon(Icons.rate_review_outlined),
+                title: Text("Review"),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Review(),
+                    ),
+                  );
+                },
+              ),
               ListTile(
-                  leading: Icon(Icons.local_offer_outlined),
-                  title: Text("Vouchers and Offers"),
+                leading: Icon(Icons.local_offer_outlined),
+                title: Text("Vouchers and Offers"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -137,10 +118,11 @@ class _HomeActivityState extends State<HomeActivity> {
                       builder: (context) => const Offers(),
                     ),
                   );
-                },),
+                },
+              ),
               ListTile(
-                  leading: Icon(Icons.event_available),
-                  title: Text("Yarn Stock"),
+                leading: Icon(Icons.event_available),
+                title: Text("Yarn Stock"),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -149,7 +131,8 @@ class _HomeActivityState extends State<HomeActivity> {
                       builder: (context) => const YarnStock(),
                     ),
                   );
-                },),
+                },
+              ),
               ListTile(
                 leading: Icon(Icons.delivery_dining_outlined),
                 title: Text("Delivery Policy"),
@@ -163,7 +146,6 @@ class _HomeActivityState extends State<HomeActivity> {
                   );
                 },
               ),
-
               ListTile(
                 title: Text("Return and Refund Policy"),
                 onTap: () {
@@ -391,30 +373,6 @@ class _HomeActivityState extends State<HomeActivity> {
             ),
           ),
         ),
-  //       SingleChildScrollView(
-  //         scrollDirection: Axis.horizontal,
-  //         child: GetBuilder<ProductCustomerController>(
-  //           builder: (ctrl) {
-  //             if (ctrl.productShowInUi.isEmpty) {
-  //               return Center(child: CircularProgressIndicator());
-  //             }
-  //             return Row(
-  //               children: ctrl.productShowInUi.map((product) {
-  //                 return _buildProductCard(
-  //                   context,
-  //                   product.image ?? 'default_image.png',
-  //                   product.name ?? 'No Name',
-  //                   product.price ?? 0,
-  //                   product,
-  //                 );
-  //               }).toList(),
-  //             );
-  //           },
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
         GetBuilder<ProductCustomerController>(
           builder: (ctrl) {
             if (ctrl.productShowInUi.isEmpty) {
@@ -484,4 +442,3 @@ class _HomeActivityState extends State<HomeActivity> {
     );
   }
 }
-

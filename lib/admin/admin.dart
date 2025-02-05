@@ -141,7 +141,6 @@ class DashboardContent extends StatelessWidget {
           if (index == 0) {
             return DashboardCard(
               title: 'Users',
-
               icon: Icons.people,
               count: 150,
               backgroundColor: AppColors.pink4,
@@ -196,23 +195,7 @@ class DashboardContent extends StatelessWidget {
                 );
               },
             );
-          }
-          // else if (index == 2) {
-          //   return DashboardCard(
-          //     title: 'Orders',
-          //     icon: Icons.monetization_on,
-          //     count: 120,
-          //     backgroundColor: AppColors.pink4,
-          //     textColor: AppColors.pink3,
-          //     onTap: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(builder: (context) => const AdminOrderList ()),
-          //       );
-          //     },
-          //   );
-          // }
-          else if (index == 2) {
+          } else if (index == 2) {
             return StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection('orders').snapshots(),
@@ -300,11 +283,6 @@ class DashboardCard extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: onTap,
-        //() {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text('Clicked on $title')),
-        //   );
-        // },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

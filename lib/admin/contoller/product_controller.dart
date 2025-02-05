@@ -52,21 +52,6 @@ class ProductController extends GetxController {
     }
   }
 
-  // if (pickedFile != null) {
-  //   print(pickedFile.path.toString());
-  //   final file = await pickedFile.readAsBytes();
-  //   final fileName = '${DateTime.now().toIso8601String()}.jpg';
-  //   final response = await supabase
-  //       .storage
-  //       .from('product_images')
-  //       .uploadBinary(fileName, file);
-  //
-  //   if (response.error == null) {
-  //     imageUrl = supabase.storage.from('product_images').getPublicUrl(fileName);
-  //     update();
-  //   }
-  // }
-
   addProduct() async {
     try {
       DocumentReference doc = productCollection.doc();

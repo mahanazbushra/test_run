@@ -16,16 +16,19 @@ class ProductInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProductCustomerController>(builder: (ctrl) {
       return RefreshIndicator(
-        onRefresh: () async { ctrl.fetchProducts(); },
+        onRefresh: () async {
+          ctrl.fetchProducts();
+        },
         child: Scaffold(
-          backgroundColor: Color.fromRGBO(253, 227, 227,1.0),
+          backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
           appBar: AppBar(
             backgroundColor: const Color.fromRGBO(96, 81, 81, 1.0),
             foregroundColor: Colors.white,
             title: const Text(
-              'All Products', style: TextStyle(fontWeight: FontWeight.bold),),
-elevation: 0,
-
+              'All Products',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            elevation: 0,
             scrolledUnderElevation: 0,
           ),
           body: Column(
@@ -37,12 +40,15 @@ elevation: 0,
                     itemCount: ctrl.productCategory.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: (){
-                          ctrl.filterByCategory(ctrl.productCategory[index].name?? '');
+                        onTap: () {
+                          ctrl.filterByCategory(
+                              ctrl.productCategory[index].name ?? '');
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(6),
-                          child: Chip(label: Text(ctrl.productCategory[index].name ?? 'Error')),
+                          child: Chip(
+                              label: Text(
+                                  ctrl.productCategory[index].name ?? 'Error')),
                         ),
                       );
                     }),
@@ -54,22 +60,26 @@ elevation: 0,
                       items: ['Price: Low to High', 'Price: High to Low'],
                       selectedItemText: 'Sort',
                       onSelected: (selected) {
-
-                        ctrl.sortByPrice(ascending: selected == 'Price: Low to High'? true:false);
+                        ctrl.sortByPrice(
+                            ascending: selected == 'Price: Low to High'
+                                ? true
+                                : false);
                       },
                     ),
                   ),
-                  Flexible(child: MultiSelectDdb(items: [
-                    'Fleece Yarn',
-                    'Milk Cotton',
-                    'Acrylic',
-                    'Butter Yarn',
-                    'Plush yarn'
-                  ], onSelectionChanged: (SelectedItems) {
-
-                    ctrl.filterByYarnType(selectedItems);
-
-                  },)),
+                  Flexible(
+                      child: MultiSelectDdb(
+                    items: [
+                      'Fleece Yarn',
+                      'Milk Cotton',
+                      'Acrylic',
+                      'Butter Yarn',
+                      'Plush yarn'
+                    ],
+                    onSelectionChanged: (SelectedItems) {
+                      ctrl.filterByYarnType(selectedItems);
+                    },
+                  )),
                 ],
               ),
               Expanded(
@@ -87,14 +97,12 @@ elevation: 0,
                         imageUrl: ctrl.productShowInUi[index].image ?? 'url',
                         price: ctrl.productShowInUi[index].price ?? 00,
                         onTap: () {
-                          Get.to(ProductDescription(),arguments: {'data':ctrl.productShowInUi[index]});
-                        //   Navigator.push(context, MaterialPageRoute(
-                        //       builder: (context) => const ProductDescription()),);
-                         },
+                          Get.to(ProductDescription(),
+                              arguments: {'data': ctrl.productShowInUi[index]});
+                           },
                       );
                     }),
               )
-
             ],
           ),
         ),

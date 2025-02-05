@@ -36,7 +36,7 @@ class _OrderListPageState extends State<OrderListPage> {
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('orders')
-            .where('customerEmail', isEqualTo: widget.userEmail)  // Changed field to customerEmail
+            .where('customerEmail', isEqualTo: widget.userEmail)
             .orderBy('orderDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {

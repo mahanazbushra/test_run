@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:test_run/Customer/controller_customer/purchase_controller.dart';
 import 'package:test_run/admin/admin.dart';
 import 'package:test_run/Customer/home.dart';
 import 'package:test_run/signup.dart';
@@ -68,10 +67,10 @@ void main() async {
 
     Get.put(ProductController());
     Get.put(ProductCustomerController());
-    //Get.put(PurchaseController());
+
     Get.put(CartController());
 
-    runApp(const MyApp()); // Launch the application
+    runApp(const MyApp());
   } catch (e) {
     print("Firebase initialization error: $e");
   }
@@ -94,35 +93,10 @@ class MyApp extends StatelessWidget {
         'Verify Email' :(context) => VerifyEmailPage(),
        'Admin Dashboard' : (context) => Admin(),
 
-        //'add-new-product':(context) => const AddNewProductScreen(),
-        //'update-product':(context) => const UpdateProductScreen()
+
 
       },
     );
   }
 }
 
-// import 'package:firebase_core/firebase_core.dart';
-//
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:project/signup.dart';
-//
-//
-// import 'login.dart';
-//
-//
-//   void main()  {
-//
-//
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     initialRoute: 'login',
-//     routes: {
-//       'login':(context)=>Mylogin(),
-//       'signup': (context) => SignUp(),
-//     },
-//   ));
-//
-//
-// }
