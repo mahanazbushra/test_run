@@ -4,10 +4,14 @@ class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});@override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(253, 227, 227, 1.0),
       appBar: AppBar(
         title: const Text('Notifications'),
         backgroundColor: const Color.fromRGBO(96, 81, 81, 1.0),
         foregroundColor: Colors.white,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: true,
       ),
       body: ListView(
         children: const [
@@ -19,14 +23,14 @@ class NotificationPage extends StatelessWidget {
           NotificationItem(
 
             title: 'Special Offer',
-            message: 'Get 20% off on all yarn today!',
+            message: 'Get 20% off on all crochet plushies today!',
             time: 'Yesterday',
           ),
           NotificationItem(
             title: 'Order Update',
             message: 'Your order #12345 has been shipped.',time: '2 days ago',
           ),
-          // Add more NotificationItem widgets here
+
         ],
       ),
     );

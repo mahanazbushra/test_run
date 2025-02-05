@@ -1,27 +1,21 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'checkout.dart';
-
 
 class CartItem {
   final String name;
   final double price;
   int quantity;
 
-  // RxInt quantity;
   final String imagePath;
 
   CartItem({
     required this.name,
     required this.price,
     required this.quantity,
-    //required int quantity,
     required this.imagePath,
   });
-//:// quantity = RxInt(quantity);
 }
 
 class CartController extends GetxController {
@@ -30,13 +24,13 @@ class CartController extends GetxController {
 
   double get totalPrice =>
       _items.fold(0.0, (sum, item) => sum + (item.price * item.quantity)) +
-          deliveryCharge;
+      deliveryCharge;
 
   List<CartItem> get items => _items;
 
   void addItem(CartItem newItem) {
-    final existingIndex = _items.indexWhere((item) =>
-    item.name == newItem.name);
+    final existingIndex =
+        _items.indexWhere((item) => item.name == newItem.name);
     if (existingIndex >= 0) {
       _items[existingIndex].quantity += newItem.quantity;
     } else {
@@ -63,9 +57,14 @@ class CartController extends GetxController {
   }
 }
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   final CartController cartController = Get.put(CartController());
 
   @override
@@ -91,8 +90,7 @@ class CartPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Obx(() =>
-                ListView.builder(
+            child: Obx(() => ListView.builder(
                   itemCount: cartController.items.length,
                   itemBuilder: (context, index) {
                     final item = cartController.items[index];
@@ -144,28 +142,28 @@ class CartPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Column(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.add),
-                                    onPressed: () =>
-                                        cartController.incrementQuantity(index),
-                                  ),
-
-
-                                  Text(
-                                    '${item.quantity}',
-                                    style: const TextStyle(fontSize: 16),
-
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.remove),
-                                    onPressed: () =>
-                                        cartController.decrementQuantity(index),
-                                  ),
-                                ],
-                              ),
-
+                              GetBuilder<CartController>(
+                                  builder: (cartControllert) {
+                                return Column(
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(Icons.add),
+                                        onPressed: () {
+                                          cartController
+                                              .incrementQuantity(index);
+                                        }),
+                                    Text(
+                                      '${item.quantity}',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.remove),
+                                      onPressed: () => cartController
+                                          .decrementQuantity(index),
+                                    ),
+                                  ],
+                                );
+                              }),
                             ],
                           ),
                         ),
@@ -178,9 +176,8 @@ class CartPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Color.fromRGBO(253, 227, 227, 1.0),
-              borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16)
-              ),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Column(
               children: [
@@ -194,11 +191,8 @@ class CartPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Obx(() =>
-                        Text(
-                          '৳${(cartController.totalPrice -
-                              CartController.deliveryCharge).toStringAsFixed(
-                              2)}',
+                    Obx(() => Text(
+                          '৳${(cartController.totalPrice - CartController.deliveryCharge).toStringAsFixed(2)}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -238,8 +232,7 @@ class CartPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Obx(() =>
-                        Text(
+                    Obx(() => Text(
                           '৳${cartController.totalPrice.toStringAsFixed(2)}',
                           style: const TextStyle(
                             fontSize: 18,
@@ -273,15 +266,12 @@ class CartPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 Row(
                   children: [
-
                     Expanded(
                       child: OutlinedButton(
-
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-
-                          side: const BorderSide(color: Color.fromRGBO(
-                              96, 81, 81, 1.0)),
+                          side: const BorderSide(
+                              color: Color.fromRGBO(96, 81, 81, 1.0)),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -291,14 +281,13 @@ class CartPage extends StatelessWidget {
                         },
                         child: const Text(
                           'Continue Shopping',
-                          style: TextStyle(color: Color.fromRGBO(
-                              96, 81, 81, 1.0)),
+                          style:
+                              TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0)),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -311,11 +300,10 @@ class CartPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  CheckoutPage(
-                                    cartItems: cartController.items.toList(),
-                                    totalPrice: cartController.totalPrice,
-                                  ),
+                              builder: (context) => CheckoutPage(
+                                cartItems: cartController.items.toList(),
+                                totalPrice: cartController.totalPrice,
+                              ),
                             ),
                           );
                         },
@@ -327,7 +315,6 @@ class CartPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -336,5 +323,3 @@ class CartPage extends StatelessWidget {
     );
   }
 }
-
-

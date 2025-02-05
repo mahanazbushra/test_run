@@ -1,7 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:test_run/admin/product/product_admin.dart';
 
@@ -11,19 +9,8 @@ import 'package:test_run/admin/users_admin/users.dart';
 
 import '../colors.dart';
 
-
 import 'logout_admin.dart';
 import 'orders/orders.dart';
-
-
-
-
-
-// void main() {
-//   //register the controller
-//   Get.put(ProductController());
-//  runApp(const Admin()); // Use your MyApp widget as the root widget
-// }
 
 class Admin extends StatelessWidget {
   const Admin({super.key});
@@ -53,7 +40,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    DashboardContent(),Center(child: Text('Add Items Screen')),
+    DashboardContent(),
+    Center(child: Text('Add Items Screen')),
     Center(child: Text('Monthly Sales Screen')),
     Center(child: Text('Reviews Screen')),
   ];
@@ -64,7 +52,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,17 +61,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         foregroundColor: Color.fromRGBO(96, 81, 81, 1.0),
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
-          IconButton(onPressed: () {
-
-            Navigator.push(context,
-            MaterialPageRoute(
-              builder: (context) => LogoutPageAdmin(),
-            ),
-            );
-          },
-              icon: const Icon(Icons.logout, color: Color.fromRGBO(96, 81, 81, 1.0),)),
-
-
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogoutPageAdmin(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Color.fromRGBO(96, 81, 81, 1.0),
+              )),
         ],
       ),
       body: Row(
@@ -98,12 +87,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               NavigationRailDestination(
                 icon: Icon(Icons.dashboard, color: AppColors.pink6),
                 selectedIcon: Icon(Icons.dashboard, color: AppColors.pink3),
-                label: Text('Dashboard', style: TextStyle(color: AppColors.pink2)),
+                label:
+                    Text('Dashboard', style: TextStyle(color: AppColors.pink2)),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.add, color: AppColors.pink6),
                 selectedIcon: Icon(Icons.add, color: AppColors.pink3),
-                label: Text('Add Items', style: TextStyle(color: AppColors.pink2)),
+                label:
+                    Text('Add Items', style: TextStyle(color: AppColors.pink2)),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.attach_money, color: AppColors.pink6),
@@ -113,13 +104,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               NavigationRailDestination(
                 icon: Icon(Icons.reviews, color: AppColors.pink6),
                 selectedIcon: Icon(Icons.reviews, color: AppColors.pink3),
-                label: Text('Reviews', style: TextStyle(color: AppColors.pink2)),
+                label:
+                    Text('Reviews', style: TextStyle(color: AppColors.pink2)),
               ),
-
             ],
-
           ),
-
           const VerticalDivider(thickness: 1, width: 1),
           Expanded(
             child: Container(
@@ -152,7 +141,7 @@ class DashboardContent extends StatelessWidget {
           if (index == 0) {
             return DashboardCard(
               title: 'Users',
-              // icon: Icons.people,
+
               icon: Icons.people,
               count: 150,
               backgroundColor: AppColors.pink4,
@@ -160,13 +149,14 @@ class DashboardContent extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const UsersAdmin ()),
+                  MaterialPageRoute(builder: (context) => const UsersAdmin()),
                 );
               },
             );
           } else if (index == 1) {
             return StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('products').snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection('products').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return DashboardCard(
@@ -199,7 +189,8 @@ class DashboardContent extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ProductAdmin()),
+                      MaterialPageRoute(
+                          builder: (context) => const ProductAdmin()),
                     );
                   },
                 );
@@ -223,7 +214,8 @@ class DashboardContent extends StatelessWidget {
           // }
           else if (index == 2) {
             return StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance.collection('orders').snapshots(),
+              stream:
+                  FirebaseFirestore.instance.collection('orders').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return DashboardCard(
@@ -256,14 +248,14 @@ class DashboardContent extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AdminOrderList()),
+                      MaterialPageRoute(
+                          builder: (context) => const AdminOrderList()),
                     );
                   },
                 );
               },
             );
-          }
-          else {
+          } else {
             return DashboardCard(
               title: 'Reports',
               icon: Icons.bar_chart,
@@ -291,6 +283,7 @@ class DashboardCard extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final VoidCallback? onTap;
+
   const DashboardCard({
     super.key,
     required this.title,
@@ -317,7 +310,11 @@ class DashboardCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 32, color: textColor ?? Theme.of(context).primaryColor,),
+              Icon(
+                icon,
+                size: 32,
+                color: textColor ?? Theme.of(context).primaryColor,
+              ),
               const SizedBox(height: 4),
               Text(
                 title,
@@ -327,7 +324,8 @@ class DashboardCard extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 '$count',
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

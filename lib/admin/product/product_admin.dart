@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_run/admin/contoller/product_controller.dart';
 import 'package:test_run/admin/product/add_admin_product.dart';
-import 'package:test_run/admin/product/update_admin_product.dart'; // Import the update screen
+import 'package:test_run/admin/product/update_admin_product.dart';
 import 'package:get/get.dart';
 
 class ProductAdmin extends StatelessWidget {

@@ -20,7 +20,7 @@ final Function(List<String>) onSelectionChanged;
           child: DropdownButton2<String>(
             isExpanded: true,
             hint: Text(
-              'Select Items',
+              'Select Yarn',
               style: TextStyle(
                 fontSize: 14,
                 color: Color.fromRGBO(253, 227, 227, 1.0),

@@ -1,7 +1,4 @@
-
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,34 +40,32 @@ class ProductController extends GetxController {
     final fileBytes = await file.readAsBytes();
     final fileName = 'image_${DateTime.now().millisecondsSinceEpoch}.png';
     try {
-
       await supabase.storage.from('images').uploadBinary(fileName, fileBytes);
-
 
       final publicUrl = supabase.storage.from('images').getPublicUrl(fileName);
 
-     imageUrl = publicUrl;
+      imageUrl = publicUrl;
 
       print('Image uploaded: $publicUrl');
     } catch (e) {
       print('Upload failed: $e');
     }
   }
-    // if (pickedFile != null) {
-    //   print(pickedFile.path.toString());
-    //   final file = await pickedFile.readAsBytes();
-    //   final fileName = '${DateTime.now().toIso8601String()}.jpg';
-    //   final response = await supabase
-    //       .storage
-    //       .from('product_images')
-    //       .uploadBinary(fileName, file);
-    //
-    //   if (response.error == null) {
-    //     imageUrl = supabase.storage.from('product_images').getPublicUrl(fileName);
-    //     update();
-    //   }
-    // }
 
+  // if (pickedFile != null) {
+  //   print(pickedFile.path.toString());
+  //   final file = await pickedFile.readAsBytes();
+  //   final fileName = '${DateTime.now().toIso8601String()}.jpg';
+  //   final response = await supabase
+  //       .storage
+  //       .from('product_images')
+  //       .uploadBinary(fileName, file);
+  //
+  //   if (response.error == null) {
+  //     imageUrl = supabase.storage.from('product_images').getPublicUrl(fileName);
+  //     update();
+  //   }
+  // }
 
   addProduct() async {
     try {
@@ -108,7 +103,8 @@ class ProductController extends GetxController {
       products.assignAll(retrievedProducts);
     } catch (e) {
       print(e);
-      showToast('Failed to fetch products. Please try again.', isSuccess: false);
+      showToast('Failed to fetch products. Please try again.',
+          isSuccess: false);
     } finally {
       update();
     }
@@ -120,7 +116,8 @@ class ProductController extends GetxController {
       fetchProducts();
       showToast('Product deleted successfully', isSuccess: true);
     } catch (e) {
-      showToast('Failed to delete product. Please try again.', isSuccess: false);
+      showToast('Failed to delete product. Please try again.',
+          isSuccess: false);
       print(e);
     }
   }
