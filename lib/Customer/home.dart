@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_run/Customer/ProductCustomer/productdes.dart';
@@ -77,17 +78,36 @@ class _HomeActivityState extends State<HomeActivity> {
               leading: const Icon(Icons.shopping_bag_outlined),
               title: const Text("My Orders"),
               onTap: () {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user == null || user.email == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Please login to view orders')),
+                  );
+                  return;
+                }
+
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const OrderListPage(
-                      userId: '',
-                    ),
+                    builder: (context) => OrderListPage(userEmail: user.email!),
                   ),
                 );
               },
             ),
+
+            //   onTap: () {
+            //     Navigator.pop(context);
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const OrderListPage(
+            //           userId: 'currentUserId',
+            //         ),
+            //       ),
+            //     );
+            //   },
+            // ),
 
             ListTile(
                 leading: Icon(Icons.rate_review_outlined),

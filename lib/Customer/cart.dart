@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +10,8 @@ class CartItem {
   final String name;
   final double price;
   int quantity;
- // RxInt quantity;
+
+  // RxInt quantity;
   final String imagePath;
 
   CartItem({
@@ -17,15 +20,17 @@ class CartItem {
     required this.quantity,
     //required int quantity,
     required this.imagePath,
-  }) ;
-      //:// quantity = RxInt(quantity);
+  });
+//:// quantity = RxInt(quantity);
 }
 
 class CartController extends GetxController {
   final RxList<CartItem> _items = <CartItem>[].obs;
-static const double deliveryCharge = 100.0;
+  static const double deliveryCharge = 100.0;
+
   double get totalPrice =>
-      _items.fold(0.0, (sum, item) => sum + (item.price * item.quantity)) + deliveryCharge;
+      _items.fold(0.0, (sum, item) => sum + (item.price * item.quantity)) +
+          deliveryCharge;
 
   List<CartItem> get items => _items;
 
@@ -66,11 +71,11 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(253, 227, 227,1.0),
+      backgroundColor: Color.fromRGBO(253, 227, 227, 1.0),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(96, 81, 81, 1.0),
         foregroundColor: Colors.white,
-elevation: 0,
+        elevation: 0,
         scrolledUnderElevation: 0,
         title: const Text('Shopping Cart'),
         actions: [
@@ -148,11 +153,11 @@ elevation: 0,
                                   ),
 
 
-                                     Text(
-                                      '${item.quantity}',
-                                      style: const TextStyle(fontSize: 16),
+                                  Text(
+                                    '${item.quantity}',
+                                    style: const TextStyle(fontSize: 16),
 
-                                    ),
+                                  ),
                                   IconButton(
                                     icon: const Icon(Icons.remove),
                                     onPressed: () =>
@@ -172,9 +177,10 @@ elevation: 0,
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color:  Color.fromRGBO(253, 227, 227,1.0),
+              color: Color.fromRGBO(253, 227, 227, 1.0),
               borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16)),
+                  top: Radius.circular(16)
+              ),
             ),
             child: Column(
               children: [
@@ -188,17 +194,19 @@ elevation: 0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Obx(() => Text(
-                      '৳${(cartController.totalPrice - CartController.deliveryCharge).toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(96, 81, 81, 1.0),
-                      ),
-                    )),
+                    Obx(() =>
+                        Text(
+                          '৳${(cartController.totalPrice -
+                              CartController.deliveryCharge).toStringAsFixed(
+                              2)}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(96, 81, 81, 1.0),
+                          ),
+                        )),
                   ],
                 ),
-                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -230,14 +238,15 @@ elevation: 0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Obx(() => Text(
-                      '৳${cartController.totalPrice.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(96, 81, 81, 1.0),
-                      ),
-                    )),
+                    Obx(() =>
+                        Text(
+                          '৳${cartController.totalPrice.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(96, 81, 81, 1.0),
+                          ),
+                        )),
                   ],
                 ),
                 // Row(
@@ -271,7 +280,8 @@ elevation: 0,
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
 
-                          side: const BorderSide(color: Color.fromRGBO(96, 81, 81, 1.0)),
+                          side: const BorderSide(color: Color.fromRGBO(
+                              96, 81, 81, 1.0)),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -281,7 +291,8 @@ elevation: 0,
                         },
                         child: const Text(
                           'Continue Shopping',
-                          style: TextStyle(color: Color.fromRGBO(96, 81, 81, 1.0)),
+                          style: TextStyle(color: Color.fromRGBO(
+                              96, 81, 81, 1.0)),
                         ),
                       ),
                     ),
